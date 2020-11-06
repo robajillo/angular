@@ -9,13 +9,13 @@ import { RegisterComponent } from './register/register/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { HeaderComponent } from './header/header/header.component';
 import { FooterComponent } from './footer/footer/footer.component';
-import { CheckoutComponent } from './checkout/checkout/checkout.component';
 import { HomeComponent } from './home/home/home.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from "@angular/common/http";
+import { CheckoutComponent } from './checkout/checkout/checkout.component';
 
 
 @NgModule({
@@ -28,8 +28,8 @@ import {HttpClientModule} from "@angular/common/http";
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    CheckoutComponent,
-    HomeComponent
+    HomeComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

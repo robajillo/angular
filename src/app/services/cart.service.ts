@@ -1,52 +1,35 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
+import {Product} from "../models/product.model";
+import {Cart} from "../models/cart.model";
 
- const serverURL = 'https://cors-anywhere.herokuapp.com/https://roba-ecommerce.herokuapp.com/api/carts/'
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CartService {
-  CheckoutFromCart: any;
-  cartDataObs$: any;
-  cartTotal$: any;
-  AddProductToCart: any;
-  cartData:any;
-  UpdateCartData: any;
+    cartDataObs$: any;
+    cartTotal$: any;
+    CheckoutFromCart(arg0: number) {
+      throw new Error('Method not implemented.');
+    }
 
+    public cartListSubject = new BehaviorSubject([]);
+    public toggleCartSubject = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient) {
-  }
-
-  getAll(): Observable<any> {
-    return this.http.get( serverURL );
-  }
-
-  get(id): Observable<any> {
-    return this.http.get(`${serverURL}/${id}`);
-  }
-
-
-  create(data): Observable<any> {
-    return this.http.post(serverURL, data);
-  }
-
-  update(id, data): Observable<any> {
-    return this.http.put(`${serverURL}/${id}`, data);
-  }
-
-  delete(id): Observable<any> {
-    return this.http.delete(`${serverURL}/${id}`);
-  }
-
-  deleteAll(): Observable<any> {
-    return this.http.delete(serverURL);
-  }
-
-  findById(id): Observable<any> {
-    return this.http.get(`${serverURL}?title=${id}`);
-  }
-
+    toggleCart = () => {
+        this.toggleCartSubject.next(!this.toggleCartSubject.getValue());
+    };
+    addToCart = (cart:Cart) => {
+        let current = this.cartListSubject.getValue();
+        let dup = current.find(c=>c.product.title === cart.product.title);
+        if(dup) dup.quantity += cart.quantity;
+        else current.push(cart);
+        this.cartListSubject.next(current);
+    };
+    reloadCart = (cartList) => {
+        this.cartListSubject.next(cartList);
+    };
+    removeCart = index => {
+        let current = this.cartListSubject.getValue();
+        current.splice(index,1);
+        this.cartListSubject.next(current);
+    };
 }
-

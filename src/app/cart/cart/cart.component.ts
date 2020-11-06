@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../services/cart.service";
-import {CartModelServer} from "../../models/cart.model";
+import {Cart} from "../../models/cart.model";
 
 
 @Component({
@@ -9,21 +9,23 @@ import {CartModelServer} from "../../models/cart.model";
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  cartList(cartList: any) {
+    throw new Error('Method not implemented.');
+  }
 
-  cartData: CartModelServer;
+
   cartTotal: Number;
   subTotal: Number;
 
   constructor(public cartService: CartService) {
   }
 
-  ngOnInit() {
-     this.cartService.cartDataObs$.subscribe(data => this.cartData = data);
-     this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
-  }
 
-  ChangeQuantity(id: Number, increaseQuantity: Boolean) {
-    this.cartService.UpdateCartData(id, increaseQuantity);
-  }
+ngOnInit() {
 
+}
+changeQuantity = (cart,quantity) => {
+    cart.quantity = quantity;
+    this.cartService.reloadCart(this.cartList);
+}
 }

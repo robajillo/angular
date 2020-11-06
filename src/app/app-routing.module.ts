@@ -4,9 +4,9 @@ import {HomeComponent} from './home/home/home.component';
 import {LoginComponent} from './login/login/login.component';
 import {RegisterComponent} from './register/register/register.component';
 import {CartComponent} from './cart/cart/cart.component';
-import {CheckoutComponent} from './checkout/checkout/checkout.component';
 import {ProductComponent} from './product/product/product.component';
 import {ThankyouComponent} from './thankyou/thankyou/thankyou.component';
+import {CheckoutComponent} from './checkout/checkout/checkout.component';
 
 
 const routes: Routes = [

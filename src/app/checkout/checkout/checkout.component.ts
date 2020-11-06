@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../services/cart.service";
-import {CartModelServer} from "../../models/cart.model";
+import {Cart} from "../../models/cart.model";
 import {Router} from "@angular/router";
 import {OrderService} from "../../services/order.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -15,10 +15,11 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  cartData: CartModelServer;
+
   cartTotal: Number;
   showSpinner: Boolean;
   checkoutForm: any;
+  cartData: any;
   constructor(private cartService: CartService,
               private orderService: OrderService,
               private router: Router,

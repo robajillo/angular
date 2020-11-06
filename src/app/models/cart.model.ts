@@ -1,20 +1,6 @@
-import {ProductModelServer} from "./product.model";
+import {Product} from "./product.model";
 
-export interface CartModelServer {
-  total: Number;
-  data: [{
-    product: ProductModelServer,
-    numInCart: Number
-  }];
-}
-
-export interface CartModelPublic {
-  data: any;
-  forEach: any;
-  incart: number;
-  total: Number;
-  prodData: [{
-    id: Number,
-    incart: Number
-  }]
+export class Cart {
+    product:Product;
+    quantity:number;
 }

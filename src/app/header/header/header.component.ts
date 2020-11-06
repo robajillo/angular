@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../services/cart.service";
-import {CartModelServer} from "../../models/cart.model";
+import {Cart} from "../../models/cart.model";
 
 
 @Component({
@@ -10,18 +10,22 @@ import {CartModelServer} from "../../models/cart.model";
 })
 export class HeaderComponent implements OnInit {
 
-  cartData: CartModelServer;
-  cartTotal: Number;
+  
+  public collapse: boolean = false;
+    public cart_num:number;
 
-  constructor(public cartService: CartService) {
+  constructor(private cartService: CartService) {
   }
 
   ngOnInit() {
-  this.cartService.cartTotal$.subscribe(total => {
-    this.cartTotal = total;
-  });
-
-  this.cartService.cartDataObs$.subscribe(data => this.cartData = data);
-  }
-
+    this.cartService.cartListSubject
+        .subscribe(res => {
+            this.cart_num = res.length;
+        })
+}
+toggleCartPopup = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.cartService.toggleCart()
+}
 }
